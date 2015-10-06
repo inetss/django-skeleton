@@ -8,7 +8,7 @@ It features a carefully thought source code layout, Git awareness, and unobtrusi
 
 * Clone this project
 * Rename `src/project` and `src/project/app` accordingly (**NOTE:** for small projects `project` and `app` could be the same word)
-* Update `INSTALLED_APPS`, `ROOT_URLCONF`, `WSGI_APPLICATION`, `SECRET_KEY` and emails section in `project.settings`
+* Update `INSTALLED_APPS`, `ROOT_URLCONF`, `WSGI_APPLICATION` accordingly (also review other sections such as "Emails" and "Security")
 * Update `src/manage.py` (reference to `project.settings`)
 * Update `src/project/urls.py` (reference to `project.app.urls`)
 * Copy `src/project/settings_local.py.sample` to `settings_local.py` and setup accordingly
