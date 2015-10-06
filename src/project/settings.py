@@ -52,7 +52,7 @@ USE_TZ = True
 
 # Security
 
-SECRET_KEY = '-change me-'
+SECRET_KEY = '-change me-'  # generate a random key with 'pwgen -s 50 -n 1'
 
 
 # Templates
