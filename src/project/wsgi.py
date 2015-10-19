@@ -6,7 +6,7 @@ https://docs.djangoproject.com/en/1.8/howto/deployment/wsgi/
 """
 
 # noinspection PyUnresolvedReferences
-import manage  # set environment variables
+import manage  # set DJANGO_SETTINGS_MODULE
 
 from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()
