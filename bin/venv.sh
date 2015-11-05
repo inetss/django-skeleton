@@ -33,6 +33,6 @@ shell)
 	$SHELL
 	;;
 *)
-	$*
+	"$@"
 	;;
 esac
