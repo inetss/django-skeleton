@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-VENV_BIN=pyvenv-3.4
+VENV_BIN=pyvenv-3.5
 VENV_PATH=var/venv
 
 if [ "$*" == "" ]; then
