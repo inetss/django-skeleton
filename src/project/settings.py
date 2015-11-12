@@ -16,7 +16,7 @@ INSTALLED_APPS = (
 	'django.contrib.contenttypes',
 	'django.contrib.sessions',
 	'django.contrib.staticfiles',
-	'project.app.MyAppConfig',
+	'project.app.apps.AppConfig',
 )
 
 MIDDLEWARE_CLASSES = (
