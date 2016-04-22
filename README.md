@@ -6,12 +6,37 @@ It features a carefully thought Django project source files layout, Git awarenes
 
 # TL;DR HOWTO
 
-* Clone this project
-* Rename `src/project` and `src/project/app` accordingly (**NOTE:** for small projects `project` and `app` could be the same word)
-* Update `src/manage.py`, `src/project/settings.py`, `src/project/urls.py` and `src/project/app/apps.py` (replace `project.app.` and `project.` accordingly)
-* Review "Emails" and "Security" chapters in `src/project/settings.py`
-* Copy `src/project/settings_local.py.sample` to `settings_local.py` and setup accordingly
-* *(optionally)* Run `bin/venv.sh install && bin/manage.sh migrate && bin/manage.sh runserver`
+```sh
+git clone git@github.com:iteratia/django-skeleton.git myproject
+cd myproject
+rm -rf .git
+cd src/project
+cp settings_local.sample.py settings_local.py
+```
+
+Adjust configs:
+
+* `src/project/settings.py`: update "Emails" and "Security" chapters
+* `src/project/settings_local.py`: update local database DSN
+
+Run the development server:
+
+```sh
+bin/venv.sh install
+bin/manage.sh makemigrations myapp
+bin/manage.sh migrate
+bin/manage.sh runserver
+```
+
+## Rename `project` and `app`
+
+The default Python package is named `project` and the default Django app is named `app`. To rename them, run:
+
+```sh
+bin/rename_project_app.sh myproject myapp
+```
+
+For smaller projects, `myproject` and `myapp` could be the same word.
 
 # Provided elements
 
