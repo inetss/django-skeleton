@@ -59,6 +59,14 @@ SECRET_KEY = '-change me-'  # generate a random key with 'pwgen -s 50 -n 1'
 
 TEMPLATES = [
 	{
+		'BACKEND': 'django.template.backends.jinja2.Jinja2',
+		'DIRS': [os.path.join(PROJECT_DIR, 'jinja2')],
+		'APP_DIRS': True,
+		'OPTIONS': {
+			'environment': 'project.jinja2.environment',
+		}
+	},
+	{
 		'BACKEND': 'django.template.backends.django.DjangoTemplates',
 		'DIRS': [os.path.join(PROJECT_DIR, 'templates')],
 		'APP_DIRS': True,

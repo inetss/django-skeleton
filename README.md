@@ -8,9 +8,8 @@ It features a carefully thought Django project source files layout, Git awarenes
 
 * Clone this project
 * Rename `src/project` and `src/project/app` accordingly (**NOTE:** for small projects `project` and `app` could be the same word)
-* Update `INSTALLED_APPS`, `ROOT_URLCONF`, `WSGI_APPLICATION` accordingly (also review other sections such as "Emails" and "Security")
-* Update `src/manage.py` (reference to `project.settings`)
-* Update `src/project/urls.py` (reference to `project.app.urls`)
+* Update `src/manage.py`, `src/project/settings.py`, `src/project/urls.py` and `src/project/app/apps.py` (replace `project.app.` and `project.` accordingly)
+* Review "Emails" and "Security" chapters in `src/project/settings.py`
 * Copy `src/project/settings_local.py.sample` to `settings_local.py` and setup accordingly
 * *(optionally)* Run `bin/venv.sh install && bin/manage.sh migrate && bin/manage.sh runserver`
 
@@ -54,9 +53,13 @@ If setup for a specific environment (e.g. the production server) is to be tracke
 
 `ln -s settings_live.py src/project/settings_local.py`
 
-## Initial urlpatterns, view, model and templates
+## Initial urlpatterns, model and view
 
 These are just some sane defaults to start with.
+
+## Django and Jinja2 templates
+
+You can put your Django templates into `templates/` and Jinja2 templates into `jinja2/`. If you don't need Jinja2, you can get remove the references in `project.settings.TEMPLATES` and `requirements.txt`, and delete `src/project/jinja2.py`
 
 ## Static files folder `static/`
 
@@ -64,7 +67,7 @@ The project static files go into `static/` and become available under [http://pr
 
 For production deployment with nginx, run `manage.py collectstatic` and point `location /static/` to `.../project/var/static`.
 
-## `robots.txt` and friends
+### `robots.txt` and friends
 
 All files directly placed in `static/` folder (not in subfolders) will be also accessible as [http://project.com/filename.ext]() (without the static prefix) with a special rule in `project.urls`. Typical uses are:
 
