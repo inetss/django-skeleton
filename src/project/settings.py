@@ -57,7 +57,18 @@ SECRET_KEY = '-change me-'  # generate a random key with 'pwgen -s 50 -n 1'
 
 # Templates
 
-TEMPLATE_DIRS = os.path.join(PROJECT_DIR, 'templates'),
+TEMPLATES = [
+	{
+		'BACKEND': 'django.template.backends.django.DjangoTemplates',
+		'DIRS': [os.path.join(PROJECT_DIR, 'templates')],
+		'APP_DIRS': True,
+		'OPTIONS': {
+			'context_processors': [
+				'django.contrib.auth.context_processors.auth',
+			],
+		}
+	},
+]
 
 
 # Static files (CSS, JavaScript, Images)
