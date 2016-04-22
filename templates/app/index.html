@@ -2,4 +2,6 @@
 
 {% block content %}
 Total number of foos: {{ count }}
+<hr>
+<a href="{% url "admin:app_foo_changelist" %}">add more foos</a>
 {% endblock %}
