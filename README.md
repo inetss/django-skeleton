@@ -1,8 +1,17 @@
 # Introduction
 
-This is a skeleton for Django projects, a replacement for `django-admin.py startproject`.
+This is a skeleton for Django projects, a replacement for `django-admin.py startproject`
 
-It features a carefully thought Django project source files layout, Git awareness, and unobtrusive virtualenv integration.
+Features:
+
+* Python 3.5 (virtualenv), Django 1.9
+* Single-command virtualenv helper
+* Git awareness
+* Environment-local settings
+* Static and media files setup
+* Handling `/robots.txt`
+* Django and Jinja2 templates
+* WSGI entrypoint
 
 # TL;DR HOWTO
 
@@ -36,7 +45,7 @@ The default Python package is named `project` and the default Django app is name
 bin/rename_project_app.sh myproject myapp
 ```
 
-For smaller projects, `myproject` and `myapp` could be the same word.
+For smaller projects, `myproject` and `myapp` could often be the same word.
 
 # Provided elements
 
