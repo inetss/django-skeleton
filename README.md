@@ -97,9 +97,15 @@ You can put your Django templates into `templates/` and Jinja2 templates into `j
 
 ## Static files folder `static/`
 
-The project static files go into `static/` and become available under [http://project.com/static/]()
+`django.contrib.staticfiles` is enabled and expects project static files at `static/`. The files become available under [http://project.com/static/]()
 
-For production deployment with nginx, run `manage.py collectstatic` and point `location /static/` to `.../project/var/static`.
+For production deployment, run `manage.py collectstatic` and add a rewrite rule pointing to `var/static`. With nginx, that would be:
+
+```
+location /static/ {
+	alias /srv/project/var/static; # or "root /srv/project/var;"
+}
+```
 
 ### `robots.txt` and friends
 
