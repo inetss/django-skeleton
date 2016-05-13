@@ -14,9 +14,7 @@ EOF
 	exit 1
 fi
 
-rm $0
-cd `dirname $(cd ${0%/*} && echo $PWD/${0##*/})`
-cd ..
+cd $(dirname $(cd ${0%/*} && echo $PWD/${0##*/}))  # cd to own directory
 mv src/project/app src/project/$app
 mv src/project src/$project
 find src \( -name '*.py' -or -name '*.sample.py' \) -exec $sed -i"" "s/project\\.app/project.$app/" {} \;
@@ -25,3 +23,4 @@ find src \( -name '*.py' -or -name '*.sample.py' \) -exec $sed -i"" "s/'project'
 find src \( -name '*.py' -or -name '*.sample.py' \) -exec $sed -i"" "s|app/|$app/|" {} \;
 find templates -name '*.html' -exec $sed -i"" s/admin:app/admin:$app/ {} \;
 mv templates/app templates/$app
+rm $0
