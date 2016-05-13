@@ -32,14 +32,12 @@ die() { echo $@ 1>&2 ; exit 1; }
 [ -f "$VENV_PATH/bin/python" ] || $VENV_BIN "$VENV_PATH" || die "Failed to initialize virtualenv at $VENV_PATH"
 . "$VENV_PATH/bin/activate" || die "Failed to activate virtualenv at $VENV_PATH"
 
-command=$1
-shift
-
-case "$command" in
+case "$1" in
 install)
 	pip install --disable-pip-version-check -r requirements.txt
 	;;
 virtualenv)
+	shift
 	if [ -z "$*" ]; then
 		"$SHELL"
 	else
