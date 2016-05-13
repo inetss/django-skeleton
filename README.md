@@ -4,7 +4,7 @@ This is a skeleton for Django projects, a replacement for `django-admin.py start
 
 Features:
 
-* Python 3.5 (virtualenv), Django 1.9
+* Django 1.9, Python 2/3
 * Single-command virtualenv helper
 * Git awareness
 * Environment-local settings
@@ -31,10 +31,10 @@ Adjust configs:
 Run the development server:
 
 ```sh
-bin/venv.sh install
-bin/manage.sh makemigrations myapp
-bin/manage.sh migrate
-bin/manage.sh runserver
+./manage install
+./manage makemigrations myapp
+./manage migrate
+./manage runserver
 ```
 
 ## Rename `project` and `app`
@@ -42,7 +42,7 @@ bin/manage.sh runserver
 The default Python package is named `project` and the default Django app is named `app`. To rename them, run:
 
 ```sh
-bin/rename_project_app.sh myproject myapp
+./rename_project_app.sh myproject myapp
 ```
 
 For smaller projects, `myproject` and `myapp` could often be the same word.
@@ -115,7 +115,7 @@ Run:
 
 `src/manage.py migrate` (requires a configured Python environment)
 
-`bin/manage.sh migrate` (uses a bundled virtualenv integration, see below)
+`./manage migrate` (uses a bundled virtualenv integration, see below)
 
 Provide correct `DJANGO_SETTINGS_MODULE` environment variable and/or update the hardcoded default in `src/manage.py`.
 
@@ -140,11 +140,10 @@ Please don't put your `.pydevproject` and `.idea` ignores here. Put them in your
 
 A helper script is provided that creates and maintains a virtualenv at `var/venv/`, which is handy for developer environments.
 
-Create or update the virtualenv: `bin/venv.sh install` (uses `requirements.txt`)
-
-Run arbitrary command within the virtualenv: `bin/venv.sh pip freeze | grep blah`
-
-Run `manage.py` within the virtualenv: `bin/manage.sh migrate`
+* Create or update the virtualenv: `./manage install` (uses `requirements.txt`)
+* Activate virtualenv and open shell: `./manage virtualenv`
+* Activate virtualenv and run arbitrary command: `./manage virtualenv pip install foo`
+* Anything else activates virtualenv and runs `manage.py`: `./manage runserver 8888`
 
 # TODO
 
