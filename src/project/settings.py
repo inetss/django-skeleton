@@ -111,4 +111,4 @@ DEFAULT_FROM_EMAIL = 'noreply@project.com'
 
 # Local
 
-from .settings_local import *
+from .local_settings import *
