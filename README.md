@@ -20,13 +20,13 @@ git clone git@github.com:iteratia/django-skeleton.git myproject
 cd myproject
 rm -rf .git
 cd src/project
-cp settings_local.sample.py settings_local.py
+cp local_settings.sample.py local_settings.py
 ```
 
 Adjust configs:
 
 * `src/project/settings.py`: update "Emails" and "Security" chapters
-* `src/project/settings_local.py`: update local database DSN
+* `src/project/local_settings.py`: update local database DSN
 
 Run the development server:
 
@@ -69,7 +69,7 @@ A sample Django project `project.app` is provided, please rename it accordingly.
 
 Keep the other project applications inside the project module, and not as top-level modules. `myproject.accounts` is good, `accounts` is a no-no.
 
-## `settings.py` and `settings_local.py`
+## `settings.py` and `local_settings.py`
 
 Django settings are split into two files, one of which is shared using Git and one isn't.
 
@@ -79,13 +79,13 @@ Settings that are common between different working environments (e.g. `INSTALLED
 
 ### Local settings
 
-Settings that are local to the current working environment (e.g. `DATABASES` or `DEBUG`) are placed at `project.settings_local`, which is *.gitignore*'d. A sample local settings template is placed at `settings_local.py.sample` for reference.
+Settings that are local to the current working environment (e.g. `DATABASES` or `DEBUG`) are placed at `project.local_settings`, which is *.gitignore*'d. A sample local settings template is placed at `local_settings.py.sample` for reference.
 
 ### Tracking local settings for some environment using Git
 
-If setup for a specific environment (e.g. the production server) is to be tracked using Git, commit its settings into `project.settings_live`. In the target environment, create a symlink:
+If setup for a specific environment (e.g. the production server) is to be tracked using Git, commit its settings into `project.live_settings`. In the target environment, create a symlink:
 
-`ln -s settings_live.py src/project/settings_local.py`
+`ln -s live_settings.py src/project/local_settings.py`
 
 ## Initial urlpatterns, model and view
 
