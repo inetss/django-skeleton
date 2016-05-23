@@ -18,18 +18,19 @@ fi
 
 set -e
 
+die() { >&2 echo -e $@; exit 1; }
+
 cd $(dirname $(cd ${0%/*} && echo $PWD/${0##*/}))  # cd to own directory
 
-DJANGO_SCRIPT=${DJANGO_SCRIPT:-src/manage.py}
-python=$($(cat "$DJANGO_SCRIPT" | head -n 1 | tail -c +3) -c 'import sys; print(sys.executable)')
-
-VENV_BIN="virtualenv --python=$python"
 VENV_PATH=${VENV_PATH:-var/venv}
+if [ ! -f "$VENV_PATH/bin/activate" ]; then
+	PYTHON_VARIANTS=$(cat requirements.txt |grep '^# python: '| sed -re 's/.*://')
+	[ -n "$PYTHON_VARIANTS" ] || die "Add python variants to requirements.txt like this:\n# python: python3.5 python3.4"
+	for v in $PYTHON_VARIANTS; do python=$(which "$v"; true); if [ -n "$python" ]; then break; fi; done
+	[ -n "$python" ] || die "Could not find any of $PYTHON_VARIANTS"
+	virtualenv --python="$python" "$VENV_PATH" || die "Failed to initialize virtualenv at $VENV_PATH"
+fi
 
-die() { echo $@ 1>&2 ; exit 1; }
-
-[ -d "$VENV_PATH" ] || mkdir -p "$VENV_PATH" || die "Failed to create virtualenv directory at $VENV_PATH"
-[ -f "$VENV_PATH/bin/python" ] || $VENV_BIN "$VENV_PATH" || die "Failed to initialize virtualenv at $VENV_PATH"
 . "$VENV_PATH/bin/activate" || die "Failed to activate virtualenv at $VENV_PATH"
 
 case "$1" in
@@ -45,6 +46,7 @@ virtualenv)
 	fi
 	;;
 *)
-	"$DJANGO_SCRIPT" "$@"
+	DJANGO_SCRIPT=${DJANGO_SCRIPT:-src/manage.py}
+	python "$DJANGO_SCRIPT" "$@"
 	;;
 esac

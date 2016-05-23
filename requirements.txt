@@ -1,3 +1,4 @@
+# python: python3.5 python3.4
 Django==1.9.5
 psycopg2==2.6.1
 raven==5.13.0
