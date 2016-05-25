@@ -1,0 +1,1 @@
+FROM inetss/django-app

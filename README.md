@@ -6,12 +6,13 @@ Features:
 
 * Django 1.9, Python 2/3
 * Single-command virtualenv helper
-* Git awareness
-* Environment-local settings
+* Git aware
+* Environment-local settings (outside of Git)
 * Static and media files setup
 * Handling `/robots.txt`
 * Django and Jinja2 templates
 * WSGI entrypoint
+* Dockerfile
 
 # TL;DR HOWTO
 
@@ -28,18 +29,29 @@ Adjust configs:
 * `src/project/settings.py`: update "Emails" and "Security" chapters
 * `src/project/local_settings.py`: update local database DSN
 
-Run the development server:
+## Run the local development server...
 
 ```sh
 ./manage install
-./manage makemigrations myapp
 ./manage migrate
 ./manage runserver
 ```
 
+Then open <http://localhost:8000>
+
+## ...or, run inside Docker
+
+```
+$ docker build -t app .
+$ docker run -d --name app-postgres -e POSTGRES_PASSWORD=secret postgres
+$ docker run --rm -it --name app --link app-postgres:postgres -e DJANGO_DEBUG=1 -v $(pwd)/var/media:/app/var/media -p 8000:80 app
+```
+
+Then open <http://localhost:8000>
+
 ## Rename `project` and `app`
 
-The default Python package is named `project` and the default Django app is named `app`. To rename them, run:
+The default Python package is named `project` and the default Django app is named `project.app`. To rename them, run:
 
 ```sh
 ./rename_project_app.sh myproject myapp
@@ -51,9 +63,24 @@ For smaller projects, `myproject` and `myapp` could often be the same word.
 
 ## `/requirements.txt`
 
-`requirements.txt` is placed in the root project folder. In particular, this allows direct AWS Elastic Beanstalk deployment.
+`requirements.txt` is placed in the root project folder, like this:
 
-Keep specific library versions, such as `Django==1.8.4` and **not** `Django` or `Django<=1.9`. This **will** save you time in future.
+```
+Django==1.9.5
+psycopg2==2.6.1
+```
+
+With the default Dockerfile, this file also shows the Python version to use:
+
+```
+# python: python3.5
+```
+
+and the list of Ubuntu packages to install inside the container:
+
+```
+# apt: libjpeg-dev libpq-dev
+```
 
 ## Python sources folder `src/`
 
@@ -87,6 +114,8 @@ If setup for a specific environment (e.g. the production server) is to be tracke
 
 `ln -s live_settings.py src/project/local_settings.py`
 
+If using Docker, `docker run -e DJANGO_LOCAL_SETTINGS_FILE=live_settings.py ...` will create that symlink automatically.
+
 ## Initial urlpatterns, model and view
 
 These are just some sane defaults to start with.
@@ -97,7 +126,7 @@ You can put your Django templates into `templates/` and Jinja2 templates into `j
 
 ## Static files folder `static/`
 
-`django.contrib.staticfiles` is enabled and expects project static files at `static/`. The files become available under [http://project.com/static/]()
+`django.contrib.staticfiles` is enabled and expects project static files at `static/`. The files become available under <http://project.com/static/>
 
 For production deployment, run `manage.py collectstatic` and add a rewrite rule pointing to `var/static`. With nginx, that would be:
 
@@ -109,7 +138,7 @@ location /static/ {
 
 ### `robots.txt` and friends
 
-All files directly placed in `static/` folder (not in subfolders) will be also accessible as [http://project.com/filename.ext]() (without the static prefix) with a special rule in `project.urls`. Typical uses are:
+All files directly placed in `static/` folder (not in subfolders) will be also accessible as <http://project.com/filename.ext> (without the static prefix) with a special rule in `project.urls`. Typical uses are:
 
 * `robots.txt`
 * `favicon.ico`
@@ -123,11 +152,7 @@ Run:
 
 `./manage migrate` (uses a bundled virtualenv integration, see below)
 
-Provide correct `DJANGO_SETTINGS_MODULE` environment variable and/or update the hardcoded default in `src/manage.py`.
-
 ## WSGI entrypoint `project.wsgi.application`
-
-Provide correct `DJANGO_SETTINGS_MODULE` environment variable and/or update the hardcoded default in `src/manage.py`.
 
 ## Dynamic data folder `var/`
 
@@ -154,5 +179,5 @@ A helper script is provided that creates and maintains a virtualenv at `var/venv
 # TODO
 
 * Provide defaults for AWS Elastic Beanstalk deployment
-* Provide a sample Dockerfile
+* ~~Provide a sample Dockerfile~~
 * Invent a way to convert this generic instructions to a project-specific layout instructions
