@@ -8,12 +8,13 @@ if [ -z "$*" ]; then
 Commands:
 
 install               - install packages from requirements.txt (creates virtualenv at ${VENV_PATH} on first invocation)
+pip <arguments>       - runs pip command inside virtualenv
 virtualenv            - open shell inside virtualenv
 virtualenv <command>  - run <command> inside virtualenv (e.g. $0 virtualenv pip install foo)
 
 Anything else is passed to ${MANAGE_SCRIPT}, e.g.:
 
-runserver             - run development server
+runserver <arguments> - run development server
 migrate               - apply migrations
 END
 	exit 1
@@ -36,6 +37,9 @@ fi
 case "$1" in
 install)
 	pip install --disable-pip-version-check -r requirements.txt
+	;;
+pip)
+	"$@"
 	;;
 virtualenv)
 	shift
