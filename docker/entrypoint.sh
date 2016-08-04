@@ -13,8 +13,8 @@ if [ ! -e src/project/local_settings.py ]; then
 	ln -s ${DJANGO_LOCAL_SETTINGS:-docker_settings.py} src/project/local_settings.py
 fi
 
-sudo -u app -E src/manage.py collectstatic --link --noinput
 sudo -u app -E src/manage.py migrate --noinput
+sudo -u app -E src/manage.py collectstatic --link --noinput
 
 mkdir -p /run/nginx
 supervisord -c /etc/supervisord.conf --nodaemon

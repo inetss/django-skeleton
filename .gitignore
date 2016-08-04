@@ -1,4 +1,4 @@
 __pycache__
-*.py[cod]
 
+/src/project/local_settings.py
 /var

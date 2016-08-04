@@ -1,10 +1,11 @@
+*
+!docker
+!jinja2
+!src
+!static
+!templates
+!requirements.txt
+
 **/__pycache__
-**/*.py[cod]
 
-.git
-Dockerfile
 src/project/local_settings.py
-var
-
-# Docker doesn't have a global .dockerignore, put your local IDE files below
-.idea

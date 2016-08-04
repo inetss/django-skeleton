@@ -4,12 +4,12 @@ This is a skeleton for Django projects, a replacement for `django-admin.py start
 
 Features:
 
-* Django 1.9, Python 2/3
+* Django 1.9, Python 3
 * Single-command virtualenv helper
 * Git aware
 * Environment-local settings (outside of Git)
 * Static and media files setup
-* Handling `/robots.txt`
+* Handling `/robots.txt` and similar files
 * Django and Jinja2 templates
 * WSGI entrypoint
 * Dockerfile
@@ -33,6 +33,7 @@ Adjust configs:
 
 ```sh
 ./manage install
+./manage makemigrations app
 ./manage migrate
 ./manage runserver
 ```
@@ -42,6 +43,8 @@ Then open <http://localhost:8000>
 ## ...or, run inside Docker
 
 ```
+$ ./manage install
+$ ./manage makemigrations app
 $ docker build -t app .
 $ docker run -d --name app-postgres -e POSTGRES_PASSWORD=secret postgres
 $ docker run --rm -it --name app --link app-postgres:postgres -e DJANGO_DEBUG=1 -v $(pwd)/var/media:/app/var/media -p 8000:80 app
