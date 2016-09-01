@@ -14,7 +14,6 @@ if [ ! -e src/project/local_settings.py ]; then
 fi
 
 sudo -u app -E src/manage.py migrate --noinput
-sudo -u app -E src/manage.py collectstatic --link --noinput
+sudo -u app -E src/manage.py collectstatic --link --noinput --verbosity 0
 
-mkdir -p /run/nginx
 supervisord -c /etc/supervisord.conf --nodaemon
