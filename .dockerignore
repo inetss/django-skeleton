@@ -1,6 +1,5 @@
 *
 !docker
-!jinja2
 !src
 !static
 !templates
