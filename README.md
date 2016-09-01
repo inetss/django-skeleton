@@ -1,16 +1,17 @@
 # Introduction
 
-This is a skeleton for Django projects, a replacement for `django-admin.py startproject`
+This is a skeleton for Django projects, sort of a replacement for `django-admin.py startproject`
 
 Features:
 
 * Django 1.9, Python 3
-* Single-command virtualenv helper
-* Git aware
-* Environment-local settings (outside of Git)
+* Unobtrusive virtualenv helper
+* 3 tiers of settings:
+	* Environment-independent
+	* Environment defaults (tracked via Git)
+	* Environment overrides (outside of Git)
 * Static and media files setup
 * Handling `/robots.txt` and similar files
-* Django and Jinja2 templates
 * WSGI entrypoint
 * Dockerfile
 
@@ -23,11 +24,6 @@ rm -rf .git
 cd src/project
 cp local_settings.sample.py local_settings.py
 ```
-
-Adjust configs:
-
-* `src/project/settings.py`: update "Emails" and "Security" chapters
-* `src/project/local_settings.py`: update local database DSN
 
 ## Run the local development server...
 
@@ -62,7 +58,7 @@ The default Python package is named `project` and the default Django app is name
 
 For smaller projects, `myproject` and `myapp` could often be the same word.
 
-# Provided elements
+# Project structure
 
 ## `/requirements.txt`
 
@@ -73,59 +69,42 @@ Django==1.9.5
 psycopg2==2.6.1
 ```
 
-With the default Dockerfile, this file also shows the Python version to use:
-
-```
-# python: python3.5
-```
-
-and the list of Ubuntu packages to install inside the container:
-
-```
-# apt: libjpeg-dev libpq-dev
-```
-
 ## Python sources folder `src/`
 
 All Python sources go into `src/` folder.
-
-## Sample Django project `project`
-
-A sample Django project `project` is provided at `src/project/`, please rename it according to the actual project.
-
-## Sample Django application `project.app`
-
-A sample Django project `project.app` is provided, please rename it accordingly.
-
-Keep the other project applications inside the project module, and not as top-level modules. `myproject.accounts` is good, `accounts` is a no-no.
 
 ## `settings.py` and `local_settings.py`
 
 Django settings are split into two files, one of which is shared using Git and one isn't.
 
-### Common settings
+### Environment-independent settings
 
-Settings that are common between different working environments (e.g. `INSTALLED_APPS` or `LOGIN_URL`) are placed at `project.settings` and are tracked normally using Git.
+Settings that are common between different working environments (e.g. `INSTALLED_APPS` or `LOGIN_URL`) go into `project.settings`.
 
-### Local settings
+### Environment defaults
 
-Settings that are local to the current working environment (e.g. `DATABASES` or `DEBUG`) are placed at `project.local_settings`, which is *.gitignore*'d. A sample local settings template is placed at `local_settings.py.sample` for reference.
+Defaults for settings that are local to the current working environment (e.g. `DATABASES` or `DEBUG`) are configured at the bottom of `project.settings`.
 
-### Tracking local settings for some environment using Git
+### Environment overrides
 
-If setup for a specific environment (e.g. the production server) is to be tracked using Git, commit its settings into `project.live_settings`. In the target environment, create a symlink:
+Settings that needs to be overriden in specific environment (e.g. `ALLOWED_HOSTS`) are placed at `project.local_settings`, which is *.gitignore*'d.
 
-`ln -s live_settings.py src/project/local_settings.py`
+A sample local settings template is placed at `local_settings.py.sample` for using in developer copies.
 
-If using Docker, `docker run -e DJANGO_LOCAL_SETTINGS_FILE=live_settings.py ...` will create that symlink automatically.
+### Sharing environment overrides
 
-## Initial urlpatterns, model and view
+If setup for a specific environment (e.g. the production server) is to be shared via Git, commit its settings into `project.production_settings`. On the production server, create a symlink:
 
-These are just some sane defaults to start with.
+```bash
+cd src/project
+ln -s production_settings.py local_settings.py
+```
 
-## Django and Jinja2 templates
+If using Docker, this symlink can be created automatically with:
 
-You can put your Django templates into `templates/` and Jinja2 templates into `jinja2/`. If you don't need Jinja2, you can get remove the references in `project.settings.TEMPLATES` and `requirements.txt`, and delete `src/project/jinja2.py`
+```bash
+docker run -e DJANGO_LOCAL_SETTINGS_FILE=production_settings.py [...]
+```
 
 ## Static files folder `static/`
 
@@ -141,13 +120,13 @@ location /static/ {
 
 ### `robots.txt` and friends
 
-All files directly placed in `static/` folder (not in subfolders) will be also accessible as <http://project.com/filename.ext> (without the static prefix) with a special rule in `project.urls`. Typical uses are:
+All files directly placed in `static/` folder (not in subfolders) will be also accessible as <http://project.com/filename.ext> (i.e. without the static prefix) with a special rule in `project.urls`. Typical uses are:
 
 * `robots.txt`
 * `favicon.ico`
 * Third-party domain verification meta files
 
-## Command-line entrypoint `manage.py`
+## Django CLI entrypoint
 
 Run:
 
@@ -155,7 +134,9 @@ Run:
 
 `./manage migrate` (uses a bundled virtualenv integration, see below)
 
-## WSGI entrypoint `project.wsgi.application`
+## WSGI entrypoint
+
+Point your wsgi server to `project.wsgi.application`
 
 ## Dynamic data folder `var/`
 
@@ -182,5 +163,6 @@ A helper script is provided that creates and maintains a virtualenv at `var/venv
 # TODO
 
 * Provide defaults for AWS Elastic Beanstalk deployment
-* ~~Provide a sample Dockerfile~~
-* Invent a way to convert this generic instructions to a project-specific layout instructions
+* Split this README into:
+	1. Skeleton description (the intro part).
+	2. A document to be included with every project (the project structure part).
