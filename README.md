@@ -5,7 +5,6 @@ This is a skeleton for Django projects, sort of a replacement for `django-admin.
 Features:
 
 * Django 1.9, Python 3
-* Unobtrusive virtualenv helper
 * 3 tiers of settings:
 	* Environment-independent
 	* Environment defaults (tracked via Git)
@@ -13,7 +12,10 @@ Features:
 * Static and media files setup
 * Handling `/robots.txt` and similar files
 * WSGI entrypoint
+* Virtualenv helper
 * Dockerfile
+* Dokku compatible
+* Gitlab CI config
 
 # TL;DR HOWTO
 
