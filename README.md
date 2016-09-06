@@ -20,11 +20,10 @@ Features:
 # TL;DR HOWTO
 
 ```sh
-git clone git@github.com:iteratia/django-skeleton.git myproject
-cd myproject
+git clone git@github.com:iteratia/django-skeleton.git acme
+cd acme
 rm -rf .git
-cd src/project
-cp local_settings.sample.py local_settings.py
+cp src/acme/local_settings.sample.py src/acme/local_settings.py
 ```
 
 ## Run the local development server...
@@ -50,16 +49,6 @@ $ docker run --rm -it --name app --link app-postgres:postgres -e DJANGO_DEBUG=1 
 
 Then open <http://localhost:8000>
 
-## Rename `project` and `app`
-
-The default Python package is named `project` and the default Django app is named `project.app`. To rename them, run:
-
-```sh
-./rename_project_app.sh myproject myapp
-```
-
-For smaller projects, `myproject` and `myapp` could often be the same word.
-
 # Project structure
 
 ## `/requirements.txt`
@@ -81,24 +70,24 @@ Django settings are split into two files, one of which is shared using Git and o
 
 ### Environment-independent settings
 
-Settings that are common between different working environments (e.g. `INSTALLED_APPS` or `LOGIN_URL`) go into `project.settings`.
+Settings that are common between different working environments (e.g. `INSTALLED_APPS` or `LOGIN_URL`) go into `acme.settings`.
 
 ### Environment defaults
 
-Defaults for settings that are local to the current working environment (e.g. `DATABASES` or `DEBUG`) are configured at the bottom of `project.settings`.
+Defaults for settings that are local to the current working environment (e.g. `DATABASES` or `DEBUG`) are configured at the bottom of `acme.settings`.
 
 ### Environment overrides
 
-Settings that needs to be overriden in specific environment (e.g. `ALLOWED_HOSTS`) are placed at `project.local_settings`, which is *.gitignore*'d.
+Settings that needs to be overriden in specific environment (e.g. `ALLOWED_HOSTS`) are placed at `acme.local_settings`, which is *.gitignore*'d.
 
 A sample local settings template is placed at `local_settings.py.sample` for using in developer copies.
 
 ### Sharing environment overrides
 
-If setup for a specific environment (e.g. the production server) is to be shared via Git, commit its settings into `project.production_settings`. On the production server, create a symlink:
+If setup for a specific environment (e.g. the production server) is to be shared via Git, commit its settings into `acme.production_settings`. On the production server, create a symlink:
 
 ```bash
-cd src/project
+cd src/acme
 ln -s production_settings.py local_settings.py
 ```
 
@@ -110,19 +99,19 @@ docker run -e DJANGO_LOCAL_SETTINGS_FILE=production_settings.py [...]
 
 ## Static files folder `static/`
 
-`django.contrib.staticfiles` is enabled and expects project static files at `static/`. The files become available under <http://project.com/static/>
+`django.contrib.staticfiles` is enabled and expects project static files at `static/`. The files become available under <http://acme.com/static/>
 
 For production deployment, run `manage.py collectstatic` and add a rewrite rule pointing to `var/static`. With nginx, that would be:
 
 ```
 location /static/ {
-	alias /srv/project/var/static; # or "root /srv/project/var;"
+	alias /srv/acme/var/static; # or "root /srv/acme/var;"
 }
 ```
 
 ### `robots.txt` and friends
 
-All files directly placed in `static/` folder (not in subfolders) will be also accessible as <http://project.com/filename.ext> (i.e. without the static prefix) with a special rule in `project.urls`. Typical uses are:
+All files directly placed in `static/` folder (not in subfolders) will be also accessible as <http://acme.com/filename.ext> (i.e. without the static prefix) with a special rule in `acme.urls`. Typical uses are:
 
 * `robots.txt`
 * `favicon.ico`
@@ -138,7 +127,7 @@ Run:
 
 ## WSGI entrypoint
 
-Point your wsgi server to `project.wsgi.application`
+Point your wsgi server to `acme.wsgi.application`
 
 ## Dynamic data folder `var/`
 

@@ -9,22 +9,22 @@ The following guide assumes that the [official command line client](http://dokku
 In a local operator copy:
 
 ```bash
-DOKKU_HOST=dokku.me dokku apps:create project
-dokku postgres:create project
-dokku postgres:connect project < project.backup.sql
-dokku postgres:link project project
+DOKKU_HOST=dokku.me dokku apps:create acme
+dokku postgres:create acme
+dokku postgres:connect acme < acme.backup.sql
+dokku postgres:link acme acme
 dokku config:set SECRET_KEY=$(pwgen -s 50 -n 1)
-dokku storage:mount /var/lib/dokku/data/storage/project/media:/app/var/media
+dokku storage:mount /var/lib/dokku/data/storage/acme/media:/app/var/media
 dokku config:set \
-	ALLOWED_HOSTS=project.com \
+	ALLOWED_HOSTS=acme.com \
 	SENTRY_DSN=https://xxx:yyy@sentry.com/12345
 git push dokku master
-dokku domains:add project.com www.project.com
-dokku redirect:set project www.project.com project.com
-dokku letsencrypt project
+dokku domains:add acme.com www.acme.com
+dokku redirect:set acme www.acme.com acme.com
+dokku letsencrypt acme
 ```
 
-The project is now accessible at <https://project.com>
+The project is now accessible at <https://acme.com>
 
 ## Update production site
 
@@ -33,7 +33,7 @@ The project is now accessible at <https://project.com>
 In a local operator copy:
 
 ```bash
-git push dokku@dokku.me:project HEAD:master --force
+git push dokku@dokku.me:acme HEAD:master --force
 ```
 
 This pushes the current local branch to Dokku.

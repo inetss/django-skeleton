@@ -16,7 +16,7 @@ INSTALLED_APPS = [
 	'django.contrib.contenttypes',
 	'django.contrib.sessions',
 	'django.contrib.staticfiles',
-	'project.app.apps.AppConfig',
+	'acme.app',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -36,9 +36,9 @@ MIDDLEWARE_CLASSES = [
 	'django.middleware.security.SecurityMiddleware',
 ]
 
-ROOT_URLCONF = 'project.urls'
+ROOT_URLCONF = 'acme.urls'
 
-WSGI_APPLICATION = 'project.wsgi.application'
+WSGI_APPLICATION = 'acme.wsgi.application'
 
 USE_I18N = True
 USE_L10N = True
@@ -75,9 +75,9 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_URL = '/logout/'
 LOGOUT_REDIRECT_URL = '/'
 
-DEFAULT_FROM_EMAIL = 'noreply@project.com'
+DEFAULT_FROM_EMAIL = 'noreply@acme.com'
 
-SERVER_EMAIL = 'server@project.com'
+SERVER_EMAIL = 'server@acme.com'
 EMAIL_SUBJECT_PREFIX = ''
 
 #
@@ -97,7 +97,7 @@ if SENTRY_DSN:
 	INSTALLED_APPS.insert(0, 'raven.contrib.django.raven_compat')
 
 DATABASES = {
-	'default': env.db_settings('DATABASE_URL', 'postgres://localhost/project')
+	'default': env.db_settings('DATABASE_URL', 'postgres://localhost/acme')
 }
 
 if env('EMAIL_URL', None):

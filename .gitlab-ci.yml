@@ -8,4 +8,4 @@ deploy to production:
   environment: production
   only:
     - master
-  script: git-push dokku@dokku.me:project
+  script: git-push dokku@dokku.me:acme

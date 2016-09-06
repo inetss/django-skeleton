@@ -1,10 +1,10 @@
-# Project Name
+# ACME
 
 ## Development and deployment workflow
 
 ### Git branches
 
-* `master` is automatically deployed to <https://project.com> (with Gitlab CI)
+* `master` is automatically deployed to <https://acme.com> (with Gitlab CI)
 
 ### References
 

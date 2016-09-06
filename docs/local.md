@@ -23,20 +23,20 @@ apt-get update && apt-get install -y postgresql python3 python3-virtualenv
 ## Create PostgreSQL database
 
 ```bash
-createdb project
+createdb acme
 ```
 
 ## Copy project
 
 ```bash
-git clone git@github.com:team/project.git project
-cd project
+git clone git@github.com:acme/acme.git
+cd acme
 ```
 
 ## Setup local config
 
 ```bash
-cp src/project/local_settings.sample.py src/project/local_settings.py
+cp src/acme/local_settings.sample.py src/acme/local_settings.py
 ```
 
 Review `local_settings.py`:

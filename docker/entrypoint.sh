@@ -10,7 +10,7 @@ for v in static media; do
 	chown -R app:nogroup $d
 done
 
-s=src/project/local_settings.py
+s=src/acme/local_settings.py
 if [ ! -e "$s" ]; then
 	ln -sf "${DJANGO_LOCAL_SETTINGS:-docker_settings.py}" "$s"
 fi

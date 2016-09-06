@@ -11,7 +11,7 @@ urlpatterns = [
 	# robots.txt and friends
 	url(r'^([^/]+\.[^/]+)$', django.views.static.serve, {'document_root': settings.STATICFILES_ROOT}),
 	url(r'^admin/', include(admin.site.urls)),
-	url(r'', include('project.app.urls')),
+	url(r'', include('acme.app.urls')),
 ]
 
 if settings.DEBUG and settings.MEDIA_URL.startswith('/'):
