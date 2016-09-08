@@ -1,12 +1,7 @@
 # ACME
 
-## Development and deployment workflow
+## References
 
-### Git branches
-
-* `master` is automatically deployed to <https://acme.com> (with Gitlab CI)
-
-### References
-
-* [Install local development version](docs/local.md)
+* [Development and deployment workflow](docs/development-workflow.md)
+* [Install local development version](docs/install-local.md)
 * [Dokku integration](docs/dokku.md)
