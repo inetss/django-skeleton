@@ -1,6 +1,6 @@
 # Project structure
 
-## `/requirements.txt`
+## Python requirements
 
 `requirements.txt` is placed in the root project folder, like this:
 
@@ -9,13 +9,18 @@ Django==1.9.5
 psycopg2==2.6.1
 ```
 
-## Python sources folder `src/`
+All libraries must be pinned to their specific versions.
+
+## Python sources
 
 All Python sources go into `src/` folder.
 
-## `settings.py` and `local_settings.py`
+## Django settings
 
-Django settings are split into two files, one of which is shared using Git and one isn't.
+Django settings are split into two files:
+
+* `settings.py` goes to Git
+* `local_settings.py` is .gitignore'd.
 
 ### Environment-independent settings
 
@@ -27,9 +32,9 @@ Defaults for settings that are local to the current working environment (e.g. `D
 
 ### Environment overrides
 
-Settings that needs to be overriden in specific environment (e.g. `ALLOWED_HOSTS`) are placed at `acme.local_settings`, which is *.gitignore*'d.
+Settings that needs to be overriden in a specific environment (e.g. `ALLOWED_HOSTS`) are placed at `acme.local_settings`, which is .gitignore'd.
 
-A sample local settings template is placed at `local_settings.py.sample` for using in developer copies.
+A sample local settings template is placed at `local_settings.sample.py`.
 
 ### Sharing environment overrides
 
@@ -43,18 +48,18 @@ ln -s production_settings.py local_settings.py
 If using Docker, this symlink can be created automatically with:
 
 ```bash
-docker run -e DJANGO_LOCAL_SETTINGS_FILE=production_settings.py [...]
+docker run -e DJANGO_LOCAL_SETTINGS=production_settings.py [...]
 ```
 
-## Static files folder `static/`
+## Static files
 
-`django.contrib.staticfiles` is enabled and expects project static files at `static/`. The files become available under <http://acme.com/static/>
+`django.contrib.staticfiles` is enabled and expects project static files at `static/`. The files become available under <http://acme.com/static/>.
 
 For production deployment, run `manage.py collectstatic` and add a rewrite rule pointing to `var/static`. With nginx, that would be:
 
 ```
 location /static/ {
-	alias /srv/acme/var/static; # or "root /srv/acme/var;"
+	alias /srv/acme/var/static;  # or "root /srv/acme/var;"
 }
 ```
 
@@ -70,9 +75,9 @@ All files directly placed in `static/` folder (not in subfolders) will be also a
 
 Run:
 
-`src/manage.py migrate` (requires a configured Python environment)
+`src/manage.py shell` (requires a configured Python environment)
 
-`./manage migrate` (uses a bundled virtualenv integration, see below)
+`./manage shell` (uses a bundled virtualenv integration, see below)
 
 ## WSGI entrypoint
 
@@ -80,7 +85,7 @@ Point your wsgi server to `acme.wsgi.application`
 
 ## Dynamic data folder `var/`
 
-Everything under `var/` is *.gitignore*'d. Use it for:
+Everything under `var/` is .gitignore'd. Use it for:
 
 * `var/static/` (`manage.py collectstatic` destination)
 * `var/media/` (media files)
@@ -93,16 +98,10 @@ Please don't put your `.pydevproject` and `.idea` ignores here. Put them in your
 
 ## Local Python virtualenv
 
-A helper script is provided that creates and maintains a virtualenv at `var/venv/`, which is handy for developer environments.
+A helper script is provided that creates and maintains a virtualenv at `var/venv/`, which is handy for local developer environments.
 
 * Create or update the virtualenv: `./manage install` (uses `requirements.txt`)
 * Activate virtualenv and open shell: `./manage virtualenv`
-* Activate virtualenv and run arbitrary command: `./manage virtualenv pip install foo`
+* Activate virtualenv and run pip: `./manage pip freeze > requirements.txt`
+* Activate virtualenv and run arbitrary command: `./manage virtualenv which python`
 * Anything else activates virtualenv and runs `manage.py`: `./manage runserver 8888`
-
-# TODO
-
-* Provide defaults for AWS Elastic Beanstalk deployment
-* Split this README into:
-	1. Skeleton description (the intro part).
-	2. A document to be included with every project (the project structure part).
