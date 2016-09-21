@@ -24,11 +24,19 @@ dokku redirect:set acme www.acme.com acme.com
 dokku letsencrypt acme
 ```
 
-The project is now accessible at <https://acme.com>
+The project is now accessible at <https://acme.com>.
 
 ## Update production site
 
-**PLEASE NOTE:** You don't normally need to update the production site manually, as Gitlab CI does that automatically on every Git push.
+### ATTENTION: The production site is updated automatically!
+
+The production site is updated automatically from `master` branch with Gitlab CI: <https://git.acme.com/acme/acme/pipelines>
+
+This is configured in `.gitlab-ci.yml` file in the project root.
+
+### Manual update
+
+Please only use this if Gitlab CI is disabled or broken.
 
 In a local operator copy:
 
