@@ -58,8 +58,6 @@ bower install
 ./manage createsuperuser
 ```
 
-This only needs to run once.
-
 ## Запустить локальный сервер
 
 ```
