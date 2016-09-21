@@ -30,7 +30,7 @@ dokku letsencrypt acme
 
 ### ВНИМАНИЕ: Настроено автоматическое обновление!
 
-Лайв обновляется автоматически из ветки `master` с помощью Gitlab CI: <https://git.acme.com/acme/acme/pipelines>
+Лайв обновляется автоматически из ветки `master` с помощью Gitlab CI: <https://git.acme.com/acme/acme/pipelines>.
 
 Настройка в файле `.gitlab-ci.yml` в корне проекта.
 

@@ -74,4 +74,4 @@ This only needs to run once.
 ./manage runserver
 ```
 
-The project is now accessible at <http://localhost:8000>
+The project is now accessible at <http://localhost:8000>.

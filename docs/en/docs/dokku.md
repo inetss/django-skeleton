@@ -30,7 +30,7 @@ The project is now accessible at <https://acme.com>.
 
 ### ATTENTION: The production site is updated automatically!
 
-The production site is updated automatically from `master` branch with Gitlab CI: <https://git.acme.com/acme/acme/pipelines>
+The production site is updated automatically from `master` branch with Gitlab CI: <https://git.acme.com/acme/acme/pipelines>.
 
 This is configured in `.gitlab-ci.yml` file in the project root.
 
