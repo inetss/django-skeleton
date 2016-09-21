@@ -1,10 +1,9 @@
 *
 !docker
 !src
+src/acme/local_settings.py
 !static
 !templates
 !requirements.txt
 
 **/__pycache__
-
-src/acme/local_settings.py
