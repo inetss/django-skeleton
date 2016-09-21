@@ -16,7 +16,7 @@ Features:
 * Dockerfile
 * Dokku compatible
 * Gitlab CI config
-* [Initial project documentation](README-project.md)
+* [Initial project documentation](docs/en/README.md)
 
 # How to use
 

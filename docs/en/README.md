@@ -1,4 +1,6 @@
-# ACME
+# Project name
+
+Project description.
 
 ## References
 

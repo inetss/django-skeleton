@@ -1,6 +1,6 @@
 # Dokku integration
 
-The project is installed on Dokku platform.
+The project is installed on [Dokku](http://dokku.viewdocs.io/dokku/) platform.
 
 The following guide assumes that the [official command line client](http://dokku.viewdocs.io/dokku/community/clients/#bash-zsh-etc-dokku_clientsh) `dokku` is installed at the operator's machine.
 

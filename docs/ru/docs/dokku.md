@@ -1,6 +1,6 @@
 # Dokku
 
-Проект установлен на платформу Dokku.
+Проект установлен на платформу [Dokku](http://dokku.viewdocs.io/dokku/).
 
 В дальнейшнем подразумевается, что у оператора установлен [официальный клиент для командной строки](http://dokku.viewdocs.io/dokku/community/clients/#bash-zsh-etc-dokku_clientsh) `dokku`.
 
