@@ -16,7 +16,7 @@ Features:
 * Dockerfile
 * Dokku compatible
 * Gitlab CI config
-* [Initial project documentation](docs/en/README.md)
+* [Initial project documentation](docs-i18n/en/README.md)
 
 # How to use
 
@@ -68,5 +68,5 @@ For smaller projects, `myproject` and `myapp` could often be the same word.
 
 ```bash
 rm rename_project_app.sh
-mv README-project.md README.md
+mv docs-i18n/en/* . && rm -rf docs-i18n/
 ```
