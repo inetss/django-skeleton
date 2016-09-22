@@ -1,6 +1,6 @@
 # Project name
 
-Project description.
+Add project description here.
 
 ## References
 
