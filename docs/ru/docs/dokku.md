@@ -1,4 +1,4 @@
-# Dokku
+# Установка на платформу Dokku
 
 Проект установлен на платформу [Dokku](http://dokku.viewdocs.io/dokku/).
 

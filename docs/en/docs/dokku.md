@@ -1,4 +1,4 @@
-# Dokku integration
+# Deployment to Dokku platform
 
 The project is installed on [Dokku](http://dokku.viewdocs.io/dokku/) platform.
 
