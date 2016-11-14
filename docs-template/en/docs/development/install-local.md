@@ -8,7 +8,7 @@
 
 ```bash
 brew update
-brew install postgres python3
+brew install git postgres python3
 brew services start postgres
 pip install --upgrade pip
 pip install virtualenv
