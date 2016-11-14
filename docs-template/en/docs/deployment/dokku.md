@@ -11,8 +11,8 @@ DOKKU_HOST=dokku.me dokku apps:create acme
 dokku postgres:create acme
 dokku postgres:connect acme < acme.backup.sql
 dokku postgres:link acme acme
-dokku config:set SECRET_KEY=$(pwgen -s 50 -n 1)
 dokku storage:mount /var/lib/dokku/data/storage/acme/media:/app/var/media
+dokku config:set SECRET_KEY=$(pwgen -s 50 -n 1)
 dokku config:set \
 	ALLOWED_HOSTS=acme.com \
 	SENTRY_DSN=https://xxx:yyy@sentry.com/12345
