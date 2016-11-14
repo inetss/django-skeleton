@@ -26,7 +26,7 @@ The project is now accessible at <https://acme.com>.
 
 ## Update production site
 
-**ATTENTION: The production site is updated automatically! See [Deployment workflow](workflow.md) for details. Please only use this if Circle CI is disabled or broken.**
+**ATTENTION: The production site is updated automatically! See [Deployment workflow](workflow.md) for details. Please only use this if Gitlab CI is disabled or broken.**
 
 In a local operator copy:
 
