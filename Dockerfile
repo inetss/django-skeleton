@@ -1,4 +1,6 @@
 FROM alpine:3.4
+# Use alpine v3.5 for uwsgi-python3 (get rid of this once there is an official Docker tag)
+RUN sed -i -e 's/v3\.4/v3.5/' /etc/apk/repositories
 
 WORKDIR /app
 CMD docker/entrypoint.sh
@@ -11,19 +13,18 @@ RUN apk add --no-cache \
 		bash \
 		build-base \
 		libjpeg-turbo-dev `# for Pillow` \
-		linux-headers `# for uwsgi` \
 		nginx \
 		postgresql-dev \
 		python3 \
 		python3-dev \
 		sudo \
 		supervisor \
+		uwsgi \
+		uwsgi-python3 \
 		zlib-dev `# for Pillow` && \
 	pip3 install --no-cache-dir --upgrade pip setuptools && \
-	`# uwsgi compile fails randomly, see https://github.com/unbit/uwsgi/issues/1318` && \
-	(while true; do pip3 install --no-cache-dir --disable-pip-version-check --verbose uwsgi && break; done) && \
-	sed -i '$iinclude /app/docker/nginx/*.conf;' /etc/nginx/nginx.conf && \
 	ln -snf /app/docker/supervisor.d /etc/supervisor.d && \
+	ln -snf /app/docker/nginx/nginx.conf /etc/nginx && \
 	adduser -S app
 
 COPY requirements.txt ./
