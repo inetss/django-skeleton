@@ -1,7 +1,5 @@
 # Deployment to Dokku platform
 
-The project is installed on [Dokku](http://dokku.viewdocs.io/dokku/) platform.
-
 The following guide assumes that the [official command line client](http://dokku.viewdocs.io/dokku/community/clients/#bash-zsh-etc-dokku_clientsh) `dokku` is installed at the operator's machine.
 
 ## Initial setup
@@ -28,15 +26,7 @@ The project is now accessible at <https://acme.com>.
 
 ## Update production site
 
-### ATTENTION: The production site is updated automatically!
-
-The production site is updated automatically from `master` branch with Gitlab CI: <https://git.acme.com/acme/acme/pipelines>.
-
-This is configured in `.gitlab-ci.yml` file in the project root.
-
-### Manual update
-
-Please only use this if Gitlab CI is disabled or broken.
+**ATTENTION: The production site is updated automatically! See [Deployment workflow](workflow.md) for details. Please only use this if Circle CI is disabled or broken.**
 
 In a local operator copy:
 

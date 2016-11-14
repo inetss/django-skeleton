@@ -12,11 +12,11 @@ Features:
 * Static and media files setup
 * Handling `/robots.txt` and similar files
 * WSGI entrypoint
-* Local development Virtualenv helper
+* Virtualenv helper
 * Dockerfile
 * Dokku compatible
 * Gitlab CI config
-* [Initial project documentation](docs-i18n/en/README.md)
+* [Initial project documentation](docs-template/en/README.md)
 
 # How to use
 
@@ -60,5 +60,5 @@ For smaller projects, `myproject` and `myapp` could often be the same word.
 ## Step 4: Put the project documentation template instead of this README
 
 ```bash
-mv docs-i18n/en/* . && rm -rf docs-i18n/
+mv docs-template/en/* . && rm -rf docs-*/
 ```

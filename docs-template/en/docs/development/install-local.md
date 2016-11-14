@@ -26,7 +26,7 @@ apt-get update && apt-get install -y postgresql python3 python3-virtualenv
 createdb acme
 ```
 
-## Copy project
+## Clone project
 
 ```bash
 git clone git@github.com:acme/acme.git
@@ -39,7 +39,7 @@ cd acme
 cp src/acme/local_settings.sample.py src/acme/local_settings.py
 ```
 
-Review `local_settings.py`:
+Review the local config file:
 
 * add [database settings](https://docs.djangoproject.com/en/1.9/ref/settings/#databases) if needed
 
