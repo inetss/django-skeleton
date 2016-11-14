@@ -7,7 +7,7 @@ Add short project description here.
 ### Development
 
 * [Development workflow](docs/development/workflow.md)
-* [Install local development version](docs/development/install-local.md)
+* [Setup local development version](docs/development/setup-local.md)
 * [Project structure](https://github.com/inetss/django-skeleton/blob/master/docs-common/project-structure.md)
 
 ### Deployment
