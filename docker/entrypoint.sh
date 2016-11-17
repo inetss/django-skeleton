@@ -2,13 +2,10 @@
 
 set -e
 
-for v in static media; do
-	d=var/$v
-	mkdir -p $d
-	find $d -type d -not -perm 755 -exec chmod 755 {} \; -exec chmod -s {} \;
-	find $d -type f -not -perm 644 -exec chmod 644 {} \;
-	chown -R app:nogroup $d
-done
+mkdir -p var/{static,media}
+find var -type d -not -perm 755 -exec chmod 755 {} \; -exec chmod -s {} \;
+find var -type f -not -perm 644 -exec chmod 644 {} \;
+chown -R app:nogroup var
 
 s=src/acme/local_settings.py
 if [ ! -e "$s" ]; then
