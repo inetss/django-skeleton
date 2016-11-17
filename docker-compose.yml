@@ -8,5 +8,6 @@ services:
       - "8000:80"
     environment:
       - DATABASE_URL=postgres://postgres@db/postgres
+      - DEBUG=1
     depends_on:
       - db
