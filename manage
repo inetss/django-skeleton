@@ -7,8 +7,9 @@ if [ -z "$*" ]; then
 	cat >&2 <<END
 Commands:
 
-install               - install packages from requirements.txt (creates virtualenv at ${VENV_PATH} on first invocation)
-pip <arguments>       - runs pip command inside virtualenv
+pip <arguments>       - run pip command inside virtualenv
+pip-sync              - install packages from requirements.txt
+pip-compile           - compile requirements.in to requirements.txt
 virtualenv            - open shell inside virtualenv
 virtualenv <command>  - run <command> inside virtualenv (e.g. $0 virtualenv pip install foo)
 
@@ -36,9 +37,14 @@ fi
 
 case "$1" in
 install)
-	pip install --disable-pip-version-check -r requirements.txt
+	echo "Use $0 pip-sync to install from requirements.txt"
+	exit 1
 	;;
 pip)
+	"$@"
+	;;
+pip-sync|pip-compile)
+	test -n "$(which "$1")" || pip install pip-tools
 	"$@"
 	;;
 virtualenv)

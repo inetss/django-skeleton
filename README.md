@@ -13,6 +13,7 @@ Features:
 * Handling `/robots.txt` and similar files
 * WSGI entrypoint
 * Virtualenv helper
+* [pip-tools](https://github.com/nvie/pip-tools) integrated
 * Dockerfile
 * Dokku compatible
 * Gitlab CI config
