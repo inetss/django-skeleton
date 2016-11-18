@@ -23,8 +23,8 @@ RUN apk add --no-cache \
 		uwsgi-python3 \
 		zlib-dev `# for Pillow` && \
 	pip3 install --no-cache-dir --upgrade pip setuptools && \
+	rm -rf /etc/nginx/conf.d && ln -s /app/docker/nginx /etc/nginx/conf.d && \
 	ln -snf /app/docker/supervisor.d /etc/supervisor.d && \
-	ln -snf /app/docker/nginx/nginx.conf /etc/nginx && \
 	adduser -S app
 
 COPY requirements.txt ./
