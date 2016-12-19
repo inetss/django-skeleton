@@ -1,7 +1,7 @@
 *
 !docker
 !src
-src/acme/local_settings.py
+src/conf/local.py
 !static
 !templates
 !requirements.txt

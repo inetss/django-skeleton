@@ -3,7 +3,12 @@ import os
 from environ import Env as DjangoEnv
 from environs import Env
 
+env = Env()
+env.add_parser('db_settings', DjangoEnv.db_url_config)
+env.add_parser('email_settings', DjangoEnv.email_url_config)
+
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+VAR_DIR = os.path.join(PROJECT_DIR, 'var')
 
 INSTALLED_APPS = [
 	# Rules for this list:
@@ -38,7 +43,7 @@ MIDDLEWARE_CLASSES = [
 
 ROOT_URLCONF = 'acme.urls'
 
-WSGI_APPLICATION = 'acme.wsgi.application'
+WSGI_APPLICATION = 'manage.wsgi_application'
 
 USE_I18N = True
 USE_L10N = True
@@ -61,12 +66,13 @@ TEMPLATES = [
 ]
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(PROJECT_DIR, 'var', 'static')
+STATIC_ROOT = os.path.join(VAR_DIR, 'static')
+
 STATICFILES_ROOT = os.path.join(PROJECT_DIR, 'static')
 STATICFILES_DIRS = [STATICFILES_ROOT]
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(PROJECT_DIR, 'var', 'media')
+MEDIA_ROOT = os.path.join(VAR_DIR, 'media')
 
 # AUTH_USER_MODEL = 'accounts.User'
 
@@ -79,14 +85,6 @@ DEFAULT_FROM_EMAIL = 'noreply@acme.com'
 
 SERVER_EMAIL = 'server@acme.com'
 EMAIL_SUBJECT_PREFIX = ''
-
-#
-# Environment settings
-#
-
-env = Env()
-env.add_parser('db_settings', DjangoEnv.db_url_config)
-env.add_parser('email_settings', DjangoEnv.email_url_config)
 
 SECRET_KEY = env('SECRET_KEY', None)  # generate a random key with 'pwgen -s 50 -n 1'
 
@@ -103,6 +101,6 @@ DATABASES = {
 if env('EMAIL_URL', None):
 	vars().update(env.email_settings('EMAIL_URL'))
 
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', '')
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', [])
 
-from .local_settings import *
+from conf.local import *

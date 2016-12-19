@@ -6,9 +6,6 @@ WORKDIR /app
 CMD docker/entrypoint.sh
 EXPOSE 80
 
-# for zlib
-ENV LIBRARY_PATH=/lib:/usr/lib
-
 RUN apk add --no-cache \
 		bash \
 		build-base \

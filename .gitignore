@@ -1,4 +1,4 @@
 __pycache__
 
-/src/acme/local_settings.py
+/src/conf/local.py
 /var
