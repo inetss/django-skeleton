@@ -28,7 +28,7 @@ rm -rf .git
 
 ## Step 2: Run the local development server
 
-* Follow the steps in [Setup local developer copy](docs/en/docs/development/setup-local.md) guide...
+* Follow the steps in [Setup local developer copy](docs/development/setup-local.md) guide...
 * ...or, run Docker containers with `docker-compose up`.
 
 Then open <http://localhost:8000>.
