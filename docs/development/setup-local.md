@@ -21,7 +21,7 @@ createdb acme
 
 ## Prepare Python virtual environment
 
-[Install pyenv](https://github.com/yyuu/pyenv-installer), then:
+[Install pyenv](https://github.com/yyuu/pyenv-installer#github-way-recommended), then:
 
 ```
 pyenv install 3.5.2
