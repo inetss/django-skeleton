@@ -2,7 +2,7 @@
 
 The following guide assumes that the [official command line client](http://dokku.viewdocs.io/dokku/community/clients/#bash-zsh-etc-dokku_clientsh) `dokku` is installed at the operator's machine.
 
-## Initial setup
+## Run Dokku app
 
 In a local operator copy:
 
@@ -13,20 +13,18 @@ dokku postgres:connect acme < acme.backup.sql
 dokku postgres:link acme acme
 dokku storage:mount /srv/acme/media:/app/var/media
 dokku config:set SECRET_KEY=$(pwgen -s 50 -n 1)
-dokku config:set \
-	ALLOWED_HOSTS=acme.com \
-	SENTRY_DSN=https://xxx:yyy@sentry.com/12345
+dokku config:set $(cat dokku.env)
 git push dokku master
-dokku domains:add acme.com www.acme.com
+dokku domains:set acme.com www.acme.com
 dokku redirect:set acme www.acme.com acme.com
 dokku letsencrypt acme
 ```
 
 The project is now accessible at <https://acme.com>.
 
-## Update production site
+## Update Dokku app
 
-**ATTENTION: The production site is updated automatically! See [Deployment workflow](workflow.md) for details. Please only use this if Gitlab CI is disabled or broken.**
+**ATTENTION: Normally, the app is updated automatically! See [Deployment workflow](workflow.md) for details. Please only use this for testing or debugging.**
 
 In a local operator copy:
 

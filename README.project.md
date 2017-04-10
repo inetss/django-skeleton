@@ -7,7 +7,7 @@ Add short project description here.
 ### Development
 
 * [Development workflow](docs/development/workflow.md)
-* [Setup local developer copy](docs/development/setup-local.md)
+* [Setup local development copy](docs/development/setup-local.md)
 * [Project structure](docs/development/project-structure.md)
 
 ### Deployment
